@@ -7,9 +7,9 @@
 - name: GoCD no installed
   block:
     - name: Update yum
-      yum:
-        name: *
-        state: lastest
+      yum: 
+        name: "*"
+        state: latest
 
     - name: Install java-1.8.0-openjdk
       yum:
@@ -31,4 +31,4 @@
       become: yes
       become_user: root
 
-  when: (is_installed.results|length == 1) or (is_installed.results[1].yumstate != 'installed') 
+  when: is_installed.results|selectattr("yumstate", "match", "installed")|list|length == 0 
