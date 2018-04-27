@@ -1,0 +1,5 @@
+---
+
+- hosts: server
+  roles:
+    - non_local_server

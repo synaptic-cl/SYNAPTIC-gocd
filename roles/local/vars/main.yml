@@ -1,0 +1,11 @@
+---
+# Common vars
+gocd_version: v18.3.0
+
+# Server vars
+gocd_server_host_http_port: 8153
+gocd_server_host_https_port: 8154
+gocd_server_godata_path: /Users/sanchez_seba/Documents/synaptic/apps/gocd/gocd_server_docker
+
+# Agent vars
+gocd_agent_godata_path: /Users/sanchez_seba/Documents/synaptic/apps/gocd/gocd_agent_docker

@@ -1,0 +1,44 @@
+---
+- name: Ensure Docker is installed and running.
+  block:
+    - name: Ensure Docker is installed
+      shell: "docker --version"
+    - name: Ensure Docker is running 
+      shell: "docker info"
+  rescue:
+    - debug:
+        msg: "Error: Instala o inicia docker antes de continuar"
+    - meta: end_play
+
+- name: Pull GOCD server image
+  docker_image:
+    name: gocd/gocd-server:{{gocd_version}}
+    state: present
+
+- name: Start GOCD server
+  docker_container:
+    name: GoCD_server
+    image: gocd/gocd-server:{{gocd_version}}
+    ports:
+      - "{{gocd_server_host_http_port}}:8153"
+      - "{{gocd_server_host_https_port}}:8154"
+    volumes:
+      - "{{gocd_server_godata_path}}:/godata"
+
+- name: Get GoCD server IP
+  shell: "docker exec GoCD_server hostname -i"
+  register: gocd_server_ip
+
+- name: Pull GOCD agent
+  docker_image:
+    name: gocd/gocd-agent-alpine-3.5:{{gocd_version}}
+    state: present
+
+- name: Start GoCD agent
+  docker_container:
+    name: GoCD_agent
+    image: gocd/gocd-agent-alpine-3.5:{{gocd_version}}
+    env: 
+        GO_SERVER_URL: https://{{gocd_server_ip.stdout}}:8154/go
+    volumes:
+      - "{{gocd_agent_godata_path}}:/godata"
