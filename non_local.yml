@@ -4,6 +4,6 @@
   roles:
     - non_local_server
 
-- host: agent
+- hosts: agent
   roles:
     - non_local_agent

@@ -21,15 +21,20 @@
         name: java-1.7.0-openjdk
         state: absent
 
+    - name: Get GoCD Repos
+      get_url:
+        url: https://download.gocd.org/gocd.repo
+        dest: /etc/yum.repos.d/gocd.repo
+
     - name: Install GoCD Server
       yum:
         name: go-server
         state: present
-      become: yes
 
     - name: Start GoCD Server
       shell: "/etc/init.d/go-server start"
       become: yes
+      become_user: go
 
-    - name: Install google-oauth
+  become: yes
   when: is_installed.results|selectattr("yumstate", "match", "installed")|list|length == 0 
