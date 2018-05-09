@@ -1,10 +1,10 @@
 ---
-- name: Is GoCD already installed
+- name: Is GoCD Server already installed
   yum:
     list: go-server
   register: is_installed
 
-- name: GoCD no installed
+- name: GoCD Server no installed
   block:
     - name: Update yum
       yum: 
