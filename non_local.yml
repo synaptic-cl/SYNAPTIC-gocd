@@ -3,3 +3,7 @@
 - hosts: server
   roles:
     - non_local_server
+
+- host: agent
+  roles:
+    - non_local_agent

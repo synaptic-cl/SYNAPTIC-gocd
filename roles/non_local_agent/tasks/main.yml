@@ -1,10 +1,10 @@
 ---
-- name: Is GoCD already installed
+- name: Is GoCD Agent already installed
   yum:
-    list: go-server
+    list: go-agent
   register: is_installed
 
-- name: GoCD no installed
+- name: GoCD Agent no installed
   block:
     - name: Update yum
       yum: 
@@ -21,15 +21,14 @@
         name: java-1.7.0-openjdk
         state: absent
 
-    - name: Install GoCD Server
+    - name: Install GoCD Agent
       yum:
-        name: go-server
+        name: go-agent
         state: present
       become: yes
 
-    - name: Start GoCD Server
-      shell: "/etc/init.d/go-server start"
+    - name: Start GoCD Agent
+      shell: "/etc/init.d/go-agent start"
       become: yes
 
-    - name: Install google-oauth
   when: is_installed.results|selectattr("yumstate", "match", "installed")|list|length == 0 
