@@ -33,4 +33,4 @@ En este modo se instala GoCD servidor y agentes en maquinas remotas (Ec2 AWS).
 ## FAQ
 
 <b>- Ya tengo el servidor y agentes configurados de antemano pero quiero agregar un nuevo Agente.</b>
-Simplemente agrega la IP de la nueva maquina Agente a la lista de agentes en el archivo ```hosts``` y ejecuta la receta. La receta solo realizará cambios en aquellas maquina que no tengan GoCD instalado.
+Simplemente agrega la IP de la nueva maquina Agente a la lista de agentes en el archivo ```hosts``` y ejecuta la receta. La receta solo realizará cambios en aquellas maquina que no tengan GoCD instalado..
