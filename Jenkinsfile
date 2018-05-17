@@ -1,5 +1,5 @@
 pipeline {
-    agent { docker { image 'php' } }
+    agent { label 'MomoFlow' }
     stages {
         stage('build') {
             steps {
